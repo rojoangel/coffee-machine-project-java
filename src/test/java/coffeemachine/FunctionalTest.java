@@ -20,7 +20,7 @@ public class FunctionalTest {
     }
 
     @Test
-    public void makesOneTeaWithOneSugarAndAStick() throws Exception
+    public void forwardsOneTeaWithOneSugarAndAStickOrder() throws Exception
     {
         final Order order = new Order(DrinkType.TEA);
         order.addSugar();
@@ -37,7 +37,7 @@ public class FunctionalTest {
     }
 
     @Test
-    public void makesOneHotChocolateWithNoSugarAndNoStick() throws Exception
+    public void forwardsOneHotChocolateWithNoSugarAndNoStickOrder() throws Exception
     {
         final Order order = new Order(DrinkType.HOT_CHOCOLATE);
 
@@ -53,7 +53,7 @@ public class FunctionalTest {
     }
 
     @Test
-    public void makesOneCoffeeWithTwoSugarsAndAStick() throws Exception
+    public void forwardsOneCoffeeWithTwoSugarsAndAStickOrder() throws Exception
     {
         final Order order = new Order(DrinkType.COFFEE);
         order.addSugar();
