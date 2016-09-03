@@ -35,6 +35,22 @@ public class LogicTest {
         CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
         coffeeMachine.makeDrink();
     }
+    
+    @Test
+    public void makesOneHotChocolateWithNoSugarAndNoStick() throws Exception
+    {
+        final Order order = new Order("HotChocolate");
+
+        context.checking(new Expectations() {{
+            oneOf(userInputReader).readInput();
+            will(returnValue(order));
+
+            oneOf(drinkMaker).makeDrink("H::");
+        }});
+
+        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
+        coffeeMachine.makeDrink();
+    }
 
     @After
     public void tearDown() throws Exception {

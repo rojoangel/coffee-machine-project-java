@@ -13,4 +13,8 @@ public class Order
     public void addSugar() {
         this.sugarQuantity ++;
     }
+
+    public String getDrinkType() {
+        return drinkType;
+    }
 }

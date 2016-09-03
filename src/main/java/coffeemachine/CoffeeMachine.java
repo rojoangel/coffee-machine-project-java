@@ -12,6 +12,11 @@ public class CoffeeMachine
 
     public void makeDrink() {
         Order order = userInputReader.readInput();
-        drinkMaker.makeDrink("T:1:0");
+        if ("Tea".equals(order.getDrinkType())) {
+            drinkMaker.makeDrink("T:1:0");
+            return;
+        }
+        drinkMaker.makeDrink("H::");
+
     }
 }
