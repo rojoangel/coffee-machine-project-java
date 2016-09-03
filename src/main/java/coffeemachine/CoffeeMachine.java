@@ -12,15 +12,19 @@ public class CoffeeMachine
 
     public void makeDrink() {
         Order order = userInputReader.readInput();
+        String instructions = adapt(order);
+        drinkMaker.makeDrink(instructions);
+
+    }
+
+    private String adapt(Order order) {
+        String instructions = "H::";
         if (DrinkType.COFFEE.equals(order.getDrinkType())) {
-            drinkMaker.makeDrink("C:2:0");
-            return;
+            instructions = "C:2:0";
         }
         if (DrinkType.TEA.equals(order.getDrinkType())) {
-            drinkMaker.makeDrink("T:1:0");
-            return;
+            instructions = "T:1:0";
         }
-        drinkMaker.makeDrink("H::");
-
+        return instructions;
     }
 }
