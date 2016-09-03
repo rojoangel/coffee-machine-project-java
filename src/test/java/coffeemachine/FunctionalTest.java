@@ -11,17 +11,26 @@ public class FunctionalTest {
     private Mockery context;
     private DrinkMaker drinkMaker;
     private UserInputReader userInputReader;
+    private MoneyChecker moneyChecker;
 
     @Before
     public void setUp() throws Exception {
         context = new Mockery();
         drinkMaker = context.mock(DrinkMaker.class);
         userInputReader = context.mock(UserInputReader.class);
+        moneyChecker = context.mock(MoneyChecker.class);
+    }
+
+    private CoffeeMachine configureFreeMachine() {
+        return new CoffeeMachine(drinkMaker, userInputReader, new AlwaysEnoughMoney());
+    }
+
+    private CoffeeMachine configureMoneyCheckingMachine() {
+        return new CoffeeMachine(drinkMaker, userInputReader, moneyChecker);
     }
 
     @Test
-    public void forwardsOneTeaWithOneSugarAndAStickOrder() throws Exception
-    {
+    public void forwardsOneTeaWithOneSugarAndAStickOrder() throws Exception {
         final Order order = new Order(DrinkType.TEA);
         order.addSugar();
 
@@ -32,13 +41,12 @@ public class FunctionalTest {
             oneOf(drinkMaker).process("T:1:0");
         }});
 
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
+        CoffeeMachine coffeeMachine = configureFreeMachine();
         coffeeMachine.makeDrink();
     }
 
     @Test
-    public void forwardsOneHotChocolateWithNoSugarAndNoStickOrder() throws Exception
-    {
+    public void forwardsOneHotChocolateWithNoSugarAndNoStickOrder() throws Exception {
         final Order order = new Order(DrinkType.HOT_CHOCOLATE);
 
         context.checking(new Expectations() {{
@@ -48,13 +56,12 @@ public class FunctionalTest {
             oneOf(drinkMaker).process("H::");
         }});
 
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
+        CoffeeMachine coffeeMachine = configureFreeMachine();
         coffeeMachine.makeDrink();
     }
 
     @Test
-    public void forwardsOneCoffeeWithTwoSugarsAndAStickOrder() throws Exception
-    {
+    public void forwardsOneCoffeeWithTwoSugarsAndAStickOrder() throws Exception {
         final Order order = new Order(DrinkType.COFFEE);
         order.addSugar();
         order.addSugar();
@@ -66,7 +73,7 @@ public class FunctionalTest {
             oneOf(drinkMaker).process("C:2:0");
         }});
 
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
+        CoffeeMachine coffeeMachine = configureFreeMachine();
         coffeeMachine.makeDrink();
     }
 
@@ -79,9 +86,27 @@ public class FunctionalTest {
             oneOf(drinkMaker).process("M:Hello user");
         }});
 
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
+        CoffeeMachine coffeeMachine = configureFreeMachine();
         coffeeMachine.displayMessage("Hello user");
 
+    }
+
+    @Test
+    public void doesNotforwardTeaOrderIfNotEnoughMoney() throws Exception {
+        final Order order = new Order(DrinkType.TEA);
+
+        context.checking(new Expectations() {{
+            oneOf(userInputReader).readInput();
+            will(returnValue(order));
+
+            oneOf(moneyChecker).getMoneyDifference(order);
+            will(returnValue(new MoneyDifference(-40, "EUR")));
+
+            oneOf(drinkMaker).process("M:There are 0,40 EUR missing");
+        }});
+
+        CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
+        coffeeMachine.makeDrink();
     }
 
     @After
