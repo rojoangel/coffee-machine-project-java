@@ -14,6 +14,13 @@ public class ProtocolAdapter {
             case HOT_CHOCOLATE:
                 instructionsBuilder.append("H");
         }
-        return instructionsBuilder.append("::").toString();
+        instructionsBuilder.append(":");
+        if (order.getSugarQuantity() == 0) {
+            return instructionsBuilder.append(":").toString();
+        }
+
+        instructionsBuilder.append(order.getSugarQuantity());
+        instructionsBuilder.append(":0");
+        return instructionsBuilder.toString();
     }
 }

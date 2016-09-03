@@ -17,4 +17,8 @@ public class Order
     public DrinkType getDrinkType() {
         return drinkType;
     }
+
+    public int getSugarQuantity() {
+        return sugarQuantity;
+    }
 }

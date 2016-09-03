@@ -29,4 +29,14 @@ public class ProtocolAdapterTest {
         String instructions = adapter.adapt(order);
         assertEquals("H::", instructions);
     }
+
+    @Test
+    public void adaptsHotChocolateWithOneSugar() throws Exception {
+        Order order = new Order(DrinkType.HOT_CHOCOLATE);
+        order.addSugar();
+        ProtocolAdapter adapter = new ProtocolAdapter();
+        String instructions = adapter.adapt(order);
+        assertEquals("H:1:0", instructions);
+    }
+
 }
