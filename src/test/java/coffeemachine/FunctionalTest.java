@@ -76,7 +76,7 @@ public class FunctionalTest {
         CoffeeMachine coffeeMachine = configureFreeMachine();
         coffeeMachine.makeDrink();
     }
-    
+
     @Test
     public void doesNotforwardTeaOrderIfNotEnoughMoney() throws Exception {
         final Order order = new Order(DrinkType.TEA);

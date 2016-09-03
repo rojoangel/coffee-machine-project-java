@@ -21,13 +21,14 @@ public class CoffeeMachine
         String instructions = orderAdapter.adapt(order);
         MoneyDifference difference = moneyChecker.getMoneyDifference(order);
         if (difference.getCents() < 0) {
-            displayMessage("There are 0,40 EUR missing");
+            displayInsufficientFundsMessage(difference);
             return;
         }
         drinkMaker.process(instructions);
     }
 
-    private void displayMessage(String message) {
+    private void displayInsufficientFundsMessage(MoneyDifference difference) {
+        InsufficientFundsMessage message = new InsufficientFundsMessage(difference);
         String instructions = messageAdapter.adapt(message);
         drinkMaker.process(instructions);
     }
