@@ -88,7 +88,7 @@ public class FunctionalTest {
             oneOf(moneyChecker).getMoneyDifference(order);
             will(returnValue(new MoneyDifference(-40, "EUR")));
 
-            oneOf(drinkMaker).process("M:There are 0,40 EUR missing");
+            oneOf(drinkMaker).process("M:There are 0,40 € missing");
         }});
 
         CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();

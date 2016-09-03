@@ -9,6 +9,6 @@ public class InsufficientFundsMessage implements Message
     }
 
     public String getText() {
-        return "There are 0,40 EUR missing";
+        return "There are " + difference.format() + " missing";
     }
 }
