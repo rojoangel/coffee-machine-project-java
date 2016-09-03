@@ -27,7 +27,7 @@ public class CoffeeMachine
         drinkMaker.process(instructions);
     }
 
-    public void displayMessage(String message) {
+    private void displayMessage(String message) {
         String instructions = messageAdapter.adapt(message);
         drinkMaker.process(instructions);
     }

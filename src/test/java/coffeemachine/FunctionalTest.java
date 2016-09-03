@@ -76,21 +76,7 @@ public class FunctionalTest {
         CoffeeMachine coffeeMachine = configureFreeMachine();
         coffeeMachine.makeDrink();
     }
-
-    @Test
-    public void forwardsMessages() throws Exception {
-
-        context.checking(new Expectations() {{
-            ignoring(userInputReader);
-
-            oneOf(drinkMaker).process("M:Hello user");
-        }});
-
-        CoffeeMachine coffeeMachine = configureFreeMachine();
-        coffeeMachine.displayMessage("Hello user");
-
-    }
-
+    
     @Test
     public void doesNotforwardTeaOrderIfNotEnoughMoney() throws Exception {
         final Order order = new Order(DrinkType.TEA);
