@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ProtocolAdapterTest {
+public class OrderAdapterTest {
 
     @Test
     public void adaptsTea() throws Exception {
         Order order = new Order(DrinkType.TEA);
-        ProtocolAdapter adapter = new ProtocolAdapter();
+        OrderAdapter adapter = new OrderAdapter();
         String instructions = adapter.adapt(order);
         assertEquals("T::", instructions);
     }
@@ -17,7 +17,7 @@ public class ProtocolAdapterTest {
     @Test
     public void adaptsCoffee() throws Exception {
         Order order = new Order(DrinkType.COFFEE);
-        ProtocolAdapter adapter = new ProtocolAdapter();
+        OrderAdapter adapter = new OrderAdapter();
         String instructions = adapter.adapt(order);
         assertEquals("C::", instructions);
     }
@@ -25,7 +25,7 @@ public class ProtocolAdapterTest {
     @Test
     public void adaptsHotChocolate() throws Exception {
         Order order = new Order(DrinkType.HOT_CHOCOLATE);
-        ProtocolAdapter adapter = new ProtocolAdapter();
+        OrderAdapter adapter = new OrderAdapter();
         String instructions = adapter.adapt(order);
         assertEquals("H::", instructions);
     }
@@ -34,7 +34,7 @@ public class ProtocolAdapterTest {
     public void adaptsHotChocolateWithOneSugar() throws Exception {
         Order order = new Order(DrinkType.HOT_CHOCOLATE);
         order.addSugar();
-        ProtocolAdapter adapter = new ProtocolAdapter();
+        OrderAdapter adapter = new OrderAdapter();
         String instructions = adapter.adapt(order);
         assertEquals("H:1:0", instructions);
     }

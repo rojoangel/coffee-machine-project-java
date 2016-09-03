@@ -1,6 +1,6 @@
 package coffeemachine;
 
-public class ProtocolAdapter {
+public class OrderAdapter {
 
     public String adapt(Order order) {
         return extractDrink(order) + ":" + extractSugar(order) + ":" + extractStick(order);

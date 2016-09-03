@@ -4,13 +4,13 @@ public class CoffeeMachine
 {
     private final DrinkMaker drinkMaker;
     private final UserInputReader userInputReader;
-    private final ProtocolAdapter orderAdapter;
+    private final OrderAdapter orderAdapter;
     private final MessageAdapter messageAdapter;
 
     public CoffeeMachine(DrinkMaker drinkMaker, UserInputReader userInputReader) {
         this.drinkMaker = drinkMaker;
         this.userInputReader = userInputReader;
-        this.orderAdapter = new ProtocolAdapter();
+        this.orderAdapter = new OrderAdapter();
         this.messageAdapter = new MessageAdapter();
     }
 
