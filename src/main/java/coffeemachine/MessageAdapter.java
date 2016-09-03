@@ -2,7 +2,7 @@ package coffeemachine;
 
 public class MessageAdapter {
 
-    String adapt(String message)
+    String notify(String message)
     {
         return "M:" + message;
     }

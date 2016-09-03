@@ -9,7 +9,7 @@ public class MessageAdapterTest {
     @Test
     public void adaptsMessage() throws Exception {
         MessageAdapter adapter = new MessageAdapter();
-        String instructions = adapter.adapt("Hello World!");
+        String instructions = adapter.notify("Hello World!");
         assertEquals("M:Hello World!", instructions);
     }
 }
