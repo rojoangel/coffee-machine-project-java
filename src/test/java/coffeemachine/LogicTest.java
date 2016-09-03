@@ -2,19 +2,29 @@ package coffeemachine;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class LogicTest {
 
-    @Test
-    public void makesOneTeaWithOneSugarAndAStick() throws Exception {
+    private Mockery context;
+    private DrinkMaker drinkMaker;
+    private UserInputReader userInputReader;
 
+    @Before
+    public void setUp() throws Exception {
+        context = new Mockery();
+        drinkMaker = context.mock(DrinkMaker.class);
+        userInputReader = context.mock(UserInputReader.class);
+    }
+
+    @Test
+    public void makesOneTeaWithOneSugarAndAStick() throws Exception
+    {
         final Order order = new Order("Tea");
         order.addSugar();
 
-        Mockery context = new Mockery();
-        final DrinkMaker drinkMaker = context.mock(DrinkMaker.class);
-        final UserInputReader userInputReader = context.mock(UserInputReader.class);
         context.checking(new Expectations() {{
             oneOf(userInputReader).readInput();
             will(returnValue(order));
@@ -24,7 +34,10 @@ public class LogicTest {
 
         CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
         coffeeMachine.makeDrink();
+    }
 
+    @After
+    public void tearDown() throws Exception {
         context.assertIsSatisfied();
     }
 }
