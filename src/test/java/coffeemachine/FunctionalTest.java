@@ -29,7 +29,7 @@ public class FunctionalTest {
             oneOf(userInputReader).readInput();
             will(returnValue(order));
 
-            oneOf(drinkMaker).makeDrink("T:1:0");
+            oneOf(drinkMaker).process("T:1:0");
         }});
 
         CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
@@ -45,7 +45,7 @@ public class FunctionalTest {
             oneOf(userInputReader).readInput();
             will(returnValue(order));
 
-            oneOf(drinkMaker).makeDrink("H::");
+            oneOf(drinkMaker).process("H::");
         }});
 
         CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
@@ -63,11 +63,25 @@ public class FunctionalTest {
             oneOf(userInputReader).readInput();
             will(returnValue(order));
 
-            oneOf(drinkMaker).makeDrink("C:2:0");
+            oneOf(drinkMaker).process("C:2:0");
         }});
 
         CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
         coffeeMachine.makeDrink();
+    }
+
+    @Test
+    public void forwardsMessages() throws Exception {
+
+        context.checking(new Expectations() {{
+            ignoring(userInputReader);
+
+            oneOf(drinkMaker).process("M:Hello user");
+        }});
+
+        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkMaker, userInputReader);
+        coffeeMachine.displayMessage("Hello user");
+
     }
 
     @After
