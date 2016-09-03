@@ -3,13 +3,11 @@ package coffeemachine;
 public class ProtocolAdapter {
 
     public String adapt(Order order) {
-        String instructions = "H::";
-        if (DrinkType.COFFEE.equals(order.getDrinkType())) {
-            instructions = "C:2:0";
+        StringBuilder instructionsBuilder = new StringBuilder();
+        switch (order.getDrinkType()) {
+            case TEA:
+                instructionsBuilder.append("T");
         }
-        if (DrinkType.TEA.equals(order.getDrinkType())) {
-            instructions = "T:1:0";
-        }
-        return instructions;
+        return instructionsBuilder.append("::").toString();
     }
 }
