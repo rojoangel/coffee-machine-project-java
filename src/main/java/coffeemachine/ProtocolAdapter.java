@@ -3,24 +3,35 @@ package coffeemachine;
 public class ProtocolAdapter {
 
     public String adapt(Order order) {
-        StringBuilder instructionsBuilder = new StringBuilder();
+        return extractDrink(order) + ":" + extractSugar(order) + ":" + extractStick(order);
+    }
+
+    private String extractDrink(Order order) {
         switch (order.getDrinkType()) {
             case TEA:
-                instructionsBuilder.append("T");
-                break;
+                return "T";
             case COFFEE:
-                instructionsBuilder.append("C");
-                break;
+                return "C";
             case HOT_CHOCOLATE:
-                instructionsBuilder.append("H");
+                return "H";
+            default:
+                return "";
         }
-        instructionsBuilder.append(":");
+    }
+
+    private String extractSugar(Order order) {
         if (order.getSugarQuantity() == 0) {
-            return instructionsBuilder.append(":").toString();
+            return "";
         }
 
-        instructionsBuilder.append(order.getSugarQuantity());
-        instructionsBuilder.append(":0");
-        return instructionsBuilder.toString();
+        return String.valueOf(order.getSugarQuantity());
+    }
+
+    private String extractStick(Order order) {
+        if (order.getSugarQuantity() == 0) {
+            return "";
+        }
+
+        return "0";
     }
 }
