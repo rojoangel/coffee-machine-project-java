@@ -21,4 +21,12 @@ public class ProtocolAdapterTest {
         String instructions = adapter.adapt(order);
         assertEquals("C::", instructions);
     }
+
+    @Test
+    public void adaptsHotChocolate() throws Exception {
+        Order order = new Order(DrinkType.HOT_CHOCOLATE);
+        ProtocolAdapter adapter = new ProtocolAdapter();
+        String instructions = adapter.adapt(order);
+        assertEquals("H::", instructions);
+    }
 }

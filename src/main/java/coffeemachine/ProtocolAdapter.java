@@ -10,6 +10,9 @@ public class ProtocolAdapter {
                 break;
             case COFFEE:
                 instructionsBuilder.append("C");
+                break;
+            case HOT_CHOCOLATE:
+                instructionsBuilder.append("H");
         }
         return instructionsBuilder.append("::").toString();
     }
