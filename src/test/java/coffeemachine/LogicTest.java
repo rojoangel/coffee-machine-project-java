@@ -22,7 +22,7 @@ public class LogicTest {
     @Test
     public void makesOneTeaWithOneSugarAndAStick() throws Exception
     {
-        final Order order = new Order("Tea");
+        final Order order = new Order(DrinkType.TEA);
         order.addSugar();
 
         context.checking(new Expectations() {{
@@ -39,7 +39,7 @@ public class LogicTest {
     @Test
     public void makesOneHotChocolateWithNoSugarAndNoStick() throws Exception
     {
-        final Order order = new Order("HotChocolate");
+        final Order order = new Order(DrinkType.HOT_CHOCOLATE);
 
         context.checking(new Expectations() {{
             oneOf(userInputReader).readInput();
@@ -55,7 +55,7 @@ public class LogicTest {
     @Test
     public void makesOneCoffeeWithTwoSugarsAndAStick() throws Exception
     {
-        final Order order = new Order("Coffee");
+        final Order order = new Order(DrinkType.COFFEE);
         order.addSugar();
         order.addSugar();
 

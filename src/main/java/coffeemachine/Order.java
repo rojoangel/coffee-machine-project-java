@@ -2,10 +2,10 @@ package coffeemachine;
 
 public class Order
 {
-    private String drinkType;
+    private DrinkType drinkType;
     private int sugarQuantity;
 
-    public Order(String drinkType) {
+    public Order(DrinkType drinkType) {
 
         this.drinkType = drinkType;
     }
@@ -14,7 +14,7 @@ public class Order
         this.sugarQuantity ++;
     }
 
-    public String getDrinkType() {
+    public DrinkType getDrinkType() {
         return drinkType;
     }
 }
