@@ -10,11 +10,31 @@ import org.jmock.Mockery;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
 public class DrinkBasedMoneyCheckerTest
 {
+
+    @Parameters(name = "{index}: insertedCents={0}, drinkPriceCents={1}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+                {0, 99},
+                {44, 99},
+                {99, 99},
+                {123, 99}
+        });
+    }
+
+    private int insertedCents;
+    private int drinkPriceCents;
     private Mockery context;
     private MoneyReader moneyReader;
 
@@ -24,44 +44,13 @@ public class DrinkBasedMoneyCheckerTest
         moneyReader = context.mock(MoneyReader.class);
     }
 
-    @Test
-    public void returnsNegatedDrinkPriceCentsWhenNoFunds() throws Exception {
-        int drinkPriceCents = 99;
-        OrderableDrink drink = new OrderableDrink(DrinkType.COFFEE, new Money(drinkPriceCents));
-        final Order order = new Order(drink);
-        final Money zeroMoney = new Money(0);
-
-        context.checking(new Expectations() {{
-            oneOf(moneyReader).readMoney();
-            will(returnValue(zeroMoney));
-        }});
-
-        DrinkBasedMoneyChecker checker = new DrinkBasedMoneyChecker(moneyReader);
-        assertEquals(new Money(-drinkPriceCents), checker.getDifference(order));
-
+    public DrinkBasedMoneyCheckerTest(int insertedCents, int drinkPriceCents) {
+        this.insertedCents = insertedCents;
+        this.drinkPriceCents = drinkPriceCents;
     }
 
     @Test
-    public void returnsNegativeDifferenceWhenNotEnoughFunds() throws Exception {
-        int drinkPriceCents = 99;
-        int insertedCents = 44;
-        OrderableDrink drink = new OrderableDrink(DrinkType.COFFEE, new Money(drinkPriceCents));
-        final Order order = new Order(drink);
-        final Money insertedMoney = new Money(insertedCents);
-
-        context.checking(new Expectations() {{
-            oneOf(moneyReader).readMoney();
-            will(returnValue(insertedMoney));
-        }});
-
-        DrinkBasedMoneyChecker checker = new DrinkBasedMoneyChecker(moneyReader);
-        assertEquals(new Money(insertedCents-drinkPriceCents), checker.getDifference(order));
-    }
-
-    @Test
-    public void returnsPositiveDifferenceWhenEnoughFunds() throws Exception {
-        int drinkPriceCents = 99;
-        int insertedCents = 123;
+    public void returnsMoneyDifference() throws Exception {
         OrderableDrink drink = new OrderableDrink(DrinkType.COFFEE, new Money(drinkPriceCents));
         final Order order = new Order(drink);
         final Money insertedMoney = new Money(insertedCents);
