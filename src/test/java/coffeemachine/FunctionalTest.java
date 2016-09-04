@@ -100,6 +100,42 @@ public class FunctionalTest {
         coffeeMachine.makeDrink();
     }
 
+    @Test
+    public void forwardsOrderIfMoneyInsertedGreaterThanPrice() throws Exception {
+        final Order order = new Order(new OrderableDrink(DrinkType.TEA, null));
+
+        context.checking(new Expectations() {{
+            oneOf(orderReader).readInput();
+            will(returnValue(order));
+
+            oneOf(moneyChecker).getDifference(order);
+            will(returnValue(new Money(40)));
+
+            oneOf(drinkMaker).process("T::");
+        }});
+
+        CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
+        coffeeMachine.makeDrink();
+    }
+
+    @Test
+    public void forwardsOrderIfMoneyInsertedEqualsThanPrice() throws Exception {
+        final Order order = new Order(new OrderableDrink(DrinkType.TEA, null));
+
+        context.checking(new Expectations() {{
+            oneOf(orderReader).readInput();
+            will(returnValue(order));
+
+            oneOf(moneyChecker).getDifference(order);
+            will(returnValue(new Money(0)));
+
+            oneOf(drinkMaker).process("T::");
+        }});
+
+        CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
+        coffeeMachine.makeDrink();
+    }
+
     @After
     public void tearDown() throws Exception {
         context.assertIsSatisfied();
