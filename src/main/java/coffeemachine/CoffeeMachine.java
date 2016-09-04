@@ -41,7 +41,6 @@ public class CoffeeMachine
 
     public void serveOrder() {
         Order order = orderReader.readInput();
-        String instructions = orderAdapter.adapt(order);
         Money difference = moneyChecker.getDifference(order);
         if (difference.getCents() < 0) {
             displayInsufficientFundsMessage(difference);
@@ -52,6 +51,7 @@ public class CoffeeMachine
             return;
         }
         salesReporter.addSale(order);
+        String instructions = orderAdapter.adapt(order);
         drinkMaker.process(instructions);
     }
 
