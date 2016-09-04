@@ -14,23 +14,23 @@ public class FunctionalTest {
 
     private Mockery context;
     private DrinkMaker drinkMaker;
-    private UserInputReader userInputReader;
+    private OrderReader orderReader;
     private MoneyChecker moneyChecker;
 
     @Before
     public void setUp() throws Exception {
         context = new Mockery();
         drinkMaker = context.mock(DrinkMaker.class);
-        userInputReader = context.mock(UserInputReader.class);
+        orderReader = context.mock(OrderReader.class);
         moneyChecker = context.mock(MoneyChecker.class);
     }
 
     private CoffeeMachine configureFreeMachine() {
-        return new CoffeeMachine(drinkMaker, userInputReader, new AlwaysEnoughMoney());
+        return new CoffeeMachine(drinkMaker, orderReader, new AlwaysEnoughMoney());
     }
 
     private CoffeeMachine configureMoneyCheckingMachine() {
-        return new CoffeeMachine(drinkMaker, userInputReader, moneyChecker);
+        return new CoffeeMachine(drinkMaker, orderReader, moneyChecker);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class FunctionalTest {
         order.addSugar();
 
         context.checking(new Expectations() {{
-            oneOf(userInputReader).readInput();
+            oneOf(orderReader).readInput();
             will(returnValue(order));
 
             oneOf(drinkMaker).process("T:1:0");
@@ -54,7 +54,7 @@ public class FunctionalTest {
         final Order order = new Order(DrinkType.HOT_CHOCOLATE);
 
         context.checking(new Expectations() {{
-            oneOf(userInputReader).readInput();
+            oneOf(orderReader).readInput();
             will(returnValue(order));
 
             oneOf(drinkMaker).process("H::");
@@ -71,7 +71,7 @@ public class FunctionalTest {
         order.addSugar();
 
         context.checking(new Expectations() {{
-            oneOf(userInputReader).readInput();
+            oneOf(orderReader).readInput();
             will(returnValue(order));
 
             oneOf(drinkMaker).process("C:2:0");
@@ -86,7 +86,7 @@ public class FunctionalTest {
         final Order order = new Order(DrinkType.TEA);
 
         context.checking(new Expectations() {{
-            oneOf(userInputReader).readInput();
+            oneOf(orderReader).readInput();
             will(returnValue(order));
 
             oneOf(moneyChecker).getDifference(order);

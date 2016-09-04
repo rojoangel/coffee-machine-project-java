@@ -9,21 +9,21 @@ import coffeemachine.domain.message.InsufficientFundsMessage;
 public class CoffeeMachine
 {
     private final DrinkMaker drinkMaker;
-    private final UserInputReader userInputReader;
+    private final OrderReader orderReader;
     private final MoneyChecker moneyChecker;
     private final OrderAdapter orderAdapter;
     private final MessageAdapter messageAdapter;
 
-    public CoffeeMachine(DrinkMaker drinkMaker, UserInputReader userInputReader, MoneyChecker moneyChecker) {
+    public CoffeeMachine(DrinkMaker drinkMaker, OrderReader orderReader, MoneyChecker moneyChecker) {
         this.drinkMaker = drinkMaker;
-        this.userInputReader = userInputReader;
+        this.orderReader = orderReader;
         this.moneyChecker = moneyChecker;
         this.orderAdapter = new OrderAdapter();
         this.messageAdapter = new MessageAdapter();
     }
 
     public void makeDrink() {
-        Order order = userInputReader.readInput();
+        Order order = orderReader.readInput();
         String instructions = orderAdapter.adapt(order);
         Money difference = moneyChecker.getDifference(order);
         if (difference.getCents() < 0) {

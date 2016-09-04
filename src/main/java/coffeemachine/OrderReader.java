@@ -2,7 +2,7 @@ package coffeemachine;
 
 import coffeemachine.domain.Order;
 
-public interface UserInputReader
+public interface OrderReader
 {
     Order readInput();
 }
