@@ -23,7 +23,7 @@ public class DrinkBasedMoneyCheckerTest
         context = new Mockery();
         moneyReader = context.mock(MoneyReader.class);
     }
-    
+
     @Test
     public void returnsNegatedDrinkPriceCentsWhenNoFunds() throws Exception {
         int drinkPriceCents = 99;
@@ -45,6 +45,23 @@ public class DrinkBasedMoneyCheckerTest
     public void returnsNegativeDifferenceWhenNotEnoughFunds() throws Exception {
         int drinkPriceCents = 99;
         int insertedCents = 44;
+        OrderableDrink drink = new OrderableDrink(DrinkType.COFFEE, new Money(drinkPriceCents));
+        final Order order = new Order(drink);
+        final Money insertedMoney = new Money(insertedCents);
+
+        context.checking(new Expectations() {{
+            oneOf(moneyReader).readMoney();
+            will(returnValue(insertedMoney));
+        }});
+
+        DrinkBasedMoneyChecker checker = new DrinkBasedMoneyChecker(moneyReader);
+        assertEquals(new Money(insertedCents-drinkPriceCents), checker.getDifference(order));
+    }
+
+    @Test
+    public void returnsPositiveDifferenceWhenEnoughFunds() throws Exception {
+        int drinkPriceCents = 99;
+        int insertedCents = 123;
         OrderableDrink drink = new OrderableDrink(DrinkType.COFFEE, new Money(drinkPriceCents));
         final Order order = new Order(drink);
         final Money insertedMoney = new Money(insertedCents);
