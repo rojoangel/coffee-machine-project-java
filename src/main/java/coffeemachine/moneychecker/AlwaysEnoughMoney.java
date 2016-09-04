@@ -6,7 +6,7 @@ import coffeemachine.domain.Order;
 
 public class AlwaysEnoughMoney implements MoneyChecker
 {
-    public MoneyDifference getMoneyDifference(Order order) {
+    public MoneyDifference getDifference(Order order) {
         return new MoneyDifference(0);
     }
 }

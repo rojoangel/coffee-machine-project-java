@@ -5,5 +5,5 @@ import coffeemachine.domain.Order;
 
 public interface MoneyChecker
 {
-    MoneyDifference getMoneyDifference(Order order);
+    MoneyDifference getDifference(Order order);
 }

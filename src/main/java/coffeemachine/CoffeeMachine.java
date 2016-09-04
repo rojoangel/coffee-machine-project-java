@@ -25,7 +25,7 @@ public class CoffeeMachine
     public void makeDrink() {
         Order order = userInputReader.readInput();
         String instructions = orderAdapter.adapt(order);
-        MoneyDifference difference = moneyChecker.getMoneyDifference(order);
+        MoneyDifference difference = moneyChecker.getDifference(order);
         if (difference.getCents() < 0) {
             displayInsufficientFundsMessage(difference);
             return;

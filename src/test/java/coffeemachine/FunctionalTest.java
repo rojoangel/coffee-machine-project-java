@@ -89,7 +89,7 @@ public class FunctionalTest {
             oneOf(userInputReader).readInput();
             will(returnValue(order));
 
-            oneOf(moneyChecker).getMoneyDifference(order);
+            oneOf(moneyChecker).getDifference(order);
             will(returnValue(new MoneyDifference(-40)));
 
             oneOf(drinkMaker).process("M:There are 0,40 € missing");
