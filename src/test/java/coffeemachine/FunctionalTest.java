@@ -83,8 +83,8 @@ public class FunctionalTest {
     }
 
     @Test
-    public void doesNotForwardTeaOrderIfNotEnoughMoney() throws Exception {
-        final Order order = new Order(OrderableDrink.TEA);
+    public void doesNotForwardOrderIfNotEnoughMoneyInserted() throws Exception {
+        final Order order = new Order(new OrderableDrink(DrinkType.TEA, null));
 
         context.checking(new Expectations() {{
             oneOf(orderReader).readInput();
