@@ -46,4 +46,8 @@ public class CoffeeMachine
         String instructions = messageAdapter.adapt(message);
         drinkMaker.process(instructions);
     }
+
+    public void reportSales() {
+        salesReporter.report();
+    }
 }

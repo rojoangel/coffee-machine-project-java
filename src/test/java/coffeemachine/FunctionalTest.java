@@ -167,6 +167,22 @@ public class FunctionalTest {
         coffeeMachine.serveOrder();
     }
 
+    @Test
+    public void reportsSales() throws Exception {
+
+        context.checking(new Expectations() {{
+            never(orderReader);
+            never(moneyChecker);
+            never(drinkMaker);
+
+            oneOf(salesReporter).report();
+
+        }});
+        CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
+        coffeeMachine.reportSales();
+
+    }
+
     @After
     public void tearDown() throws Exception {
         context.assertIsSatisfied();
