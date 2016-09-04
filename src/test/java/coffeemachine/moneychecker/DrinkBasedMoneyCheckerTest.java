@@ -1,6 +1,7 @@
 package coffeemachine.moneychecker;
 
 import coffeemachine.MoneyReader;
+import coffeemachine.domain.DrinkType;
 import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 import coffeemachine.domain.OrderableDrink;
@@ -13,10 +14,11 @@ import static org.junit.Assert.*;
 public class DrinkBasedMoneyCheckerTest
 {
     @Test
-    public void returnsDifferenceWhenNoFunds() throws Exception {
-        final Order order = new Order(OrderableDrink.TEA);
+    public void returnsNegatedDrinkPriceCentsWhenNoFunds() throws Exception {
+        int drinkPriceCents = 99;
+        OrderableDrink drink = new OrderableDrink(DrinkType.COFFEE, new Money(drinkPriceCents));
+        final Order order = new Order(drink);
         final Money zeroMoney = new Money(0);
-        final Money expectedMoney = new Money(-40);
 
         Mockery context = new Mockery();
         final MoneyReader moneyReader = context.mock(MoneyReader.class);
@@ -27,7 +29,7 @@ public class DrinkBasedMoneyCheckerTest
         }});
 
         DrinkBasedMoneyChecker checker = new DrinkBasedMoneyChecker(moneyReader);
-        assertEquals(expectedMoney, checker.getDifference(order));
+        assertEquals(new Money(-drinkPriceCents), checker.getDifference(order));
 
         context.assertIsSatisfied();
     }
