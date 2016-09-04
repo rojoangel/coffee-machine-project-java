@@ -3,6 +3,7 @@ package coffeemachine;
 import coffeemachine.domain.DrinkType;
 import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
+import coffeemachine.domain.OrderableDrink;
 import coffeemachine.moneychecker.AlwaysEnoughMoney;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -35,7 +36,7 @@ public class FunctionalTest {
 
     @Test
     public void forwardsOneTeaWithOneSugarAndAStickOrder() throws Exception {
-        final Order order = new Order(DrinkType.TEA);
+        final Order order = new Order(OrderableDrink.TEA);
         order.addSugar();
 
         context.checking(new Expectations() {{
@@ -51,7 +52,7 @@ public class FunctionalTest {
 
     @Test
     public void forwardsOneHotChocolateWithNoSugarAndNoStickOrder() throws Exception {
-        final Order order = new Order(DrinkType.HOT_CHOCOLATE);
+        final Order order = new Order(OrderableDrink.HOT_CHOCOLATE);
 
         context.checking(new Expectations() {{
             oneOf(orderReader).readInput();
@@ -66,7 +67,7 @@ public class FunctionalTest {
 
     @Test
     public void forwardsOneCoffeeWithTwoSugarsAndAStickOrder() throws Exception {
-        final Order order = new Order(DrinkType.COFFEE);
+        final Order order = new Order(OrderableDrink.COFFEE);
         order.addSugar();
         order.addSugar();
 
@@ -83,7 +84,7 @@ public class FunctionalTest {
 
     @Test
     public void doesNotForwardTeaOrderIfNotEnoughMoney() throws Exception {
-        final Order order = new Order(DrinkType.TEA);
+        final Order order = new Order(OrderableDrink.TEA);
 
         context.checking(new Expectations() {{
             oneOf(orderReader).readInput();

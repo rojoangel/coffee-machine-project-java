@@ -4,6 +4,7 @@ import coffeemachine.MoneyReader;
 import coffeemachine.domain.DrinkType;
 import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
+import coffeemachine.domain.OrderableDrink;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class DrinkTypeMoneyCheckerTest
 {
     @Test
     public void returnsDifferenceWhenNoFunds() throws Exception {
-        final Order order = new Order(DrinkType.TEA);
+        final Order order = new Order(OrderableDrink.TEA);
         final Money zeroMoney = new Money(0);
         final Money expectedMoney = new Money(-40);
 

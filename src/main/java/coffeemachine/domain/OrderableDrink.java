@@ -2,6 +2,21 @@ package coffeemachine.domain;
 
 public class OrderableDrink
 {
+    public static final OrderableDrink HOT_CHOCOLATE =
+            new OrderableDrink(
+                    DrinkType.HOT_CHOCOLATE,
+                    new Money(50));
+
+    public static final OrderableDrink TEA =
+            new OrderableDrink(
+                    DrinkType.TEA,
+                    new Money(40));
+
+    public static final OrderableDrink COFFEE =
+            new OrderableDrink(
+                    DrinkType.COFFEE,
+                    new Money(60));
+
     private DrinkType drinkType;
     private Money price;
 
