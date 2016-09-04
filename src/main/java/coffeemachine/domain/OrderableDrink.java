@@ -17,6 +17,11 @@ public class OrderableDrink
                     DrinkType.COFFEE,
                     new Money(60));
 
+    public static final OrderableDrink ORANGE_JUICE =
+            new OrderableDrink(
+                    DrinkType.ORANGE_JUICE,
+                    new Money(60));
+
     private DrinkType drinkType;
     private Money price;
 

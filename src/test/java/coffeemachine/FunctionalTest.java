@@ -101,6 +101,21 @@ public class FunctionalTest {
     }
 
     @Test
+    public void forwardsOrangeJuice() throws Exception {
+        final Order order = new Order(OrderableDrink.ORANGE_JUICE);
+
+        context.checking(new Expectations() {{
+            oneOf(orderReader).readInput();
+            will(returnValue(order));
+
+            oneOf(drinkMaker).process("O::");
+        }});
+
+        CoffeeMachine coffeeMachine = configureFreeMachine();
+        coffeeMachine.makeDrink();
+    }
+
+    @Test
     public void forwardsOrderIfMoneyInsertedGreaterThanPrice() throws Exception {
         final Order order = new Order(new OrderableDrink(DrinkType.TEA, null));
 

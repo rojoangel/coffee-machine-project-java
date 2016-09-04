@@ -16,6 +16,8 @@ public class OrderAdapter {
                 return "C";
             case HOT_CHOCOLATE:
                 return "H";
+            case ORANGE_JUICE:
+                return "O";
             default:
                 return "";
         }

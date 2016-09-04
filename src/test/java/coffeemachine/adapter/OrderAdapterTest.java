@@ -42,4 +42,11 @@ public class OrderAdapterTest {
         assertEquals("H:1:0", instructions);
     }
 
+    @Test
+    public void adaptsOrangeJuice() throws Exception {
+        Order order = new Order(OrderableDrink.ORANGE_JUICE);
+        OrderAdapter adapter = new OrderAdapter();
+        String instructions = adapter.adapt(order);
+        assertEquals("O::", instructions);
+    }
 }

@@ -2,5 +2,5 @@ package coffeemachine.domain;
 
 public enum DrinkType
 {
-    COFFEE, TEA, HOT_CHOCOLATE
+    COFFEE, TEA, ORANGE_JUICE, HOT_CHOCOLATE
 }
