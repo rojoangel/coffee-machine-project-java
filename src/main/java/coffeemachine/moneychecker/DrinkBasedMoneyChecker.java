@@ -5,11 +5,11 @@ import coffeemachine.MoneyReader;
 import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 
-public class DrinkTypeMoneyChecker implements MoneyChecker
+public class DrinkBasedMoneyChecker implements MoneyChecker
 {
     private MoneyReader moneyReader;
 
-    public DrinkTypeMoneyChecker(MoneyReader moneyReader) {
+    public DrinkBasedMoneyChecker(MoneyReader moneyReader) {
 
         this.moneyReader = moneyReader;
     }
