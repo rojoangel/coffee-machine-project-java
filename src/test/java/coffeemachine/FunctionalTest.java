@@ -45,7 +45,7 @@ public class FunctionalTest {
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
-            oneOf(salesReporter).report(order);
+            oneOf(salesReporter).addSale(order);
 
             oneOf(drinkMaker).process("T:1:0");
         }});
@@ -62,7 +62,7 @@ public class FunctionalTest {
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
-            oneOf(salesReporter).report(order);
+            oneOf(salesReporter).addSale(order);
 
             oneOf(drinkMaker).process("H::");
         }});
@@ -81,7 +81,7 @@ public class FunctionalTest {
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
-            oneOf(salesReporter).report(order);
+            oneOf(salesReporter).addSale(order);
 
             oneOf(drinkMaker).process("C:2:0");
         }});
@@ -98,7 +98,7 @@ public class FunctionalTest {
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
-            oneOf(salesReporter).report(order);
+            oneOf(salesReporter).addSale(order);
 
             oneOf(drinkMaker).process("O::");
         }});
@@ -118,7 +118,7 @@ public class FunctionalTest {
             oneOf(moneyChecker).getDifference(order);
             will(returnValue(new Money(-40)));
 
-            never(salesReporter).report(order);
+            never(salesReporter).addSale(order);
 
             oneOf(drinkMaker).process("M:There are 0,40 € missing");
         }});
@@ -138,7 +138,7 @@ public class FunctionalTest {
             oneOf(moneyChecker).getDifference(order);
             will(returnValue(new Money(40)));
 
-            oneOf(salesReporter).report(order);
+            oneOf(salesReporter).addSale(order);
 
             oneOf(drinkMaker).process("T::");
         }});
@@ -158,7 +158,7 @@ public class FunctionalTest {
             oneOf(moneyChecker).getDifference(order);
             will(returnValue(new Money(0)));
 
-            oneOf(salesReporter).report(order);
+            oneOf(salesReporter).addSale(order);
 
             oneOf(drinkMaker).process("T::");
         }});

@@ -37,7 +37,7 @@ public class CoffeeMachine
             displayInsufficientFundsMessage(difference);
             return;
         }
-        salesReporter.report(order);
+        salesReporter.addSale(order);
         drinkMaker.process(instructions);
     }
 
