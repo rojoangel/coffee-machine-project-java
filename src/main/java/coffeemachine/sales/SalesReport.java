@@ -16,6 +16,11 @@ public class SalesReport
         this.salesAmount = new Money(0);
     }
 
+    public SalesReport(Map<DrinkType, Integer> drinksSold, Money salesAmount) {
+        this.drinksSold = drinksSold;
+        this.salesAmount = salesAmount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
