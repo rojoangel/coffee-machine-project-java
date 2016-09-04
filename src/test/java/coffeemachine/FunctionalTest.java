@@ -1,7 +1,7 @@
 package coffeemachine;
 
 import coffeemachine.domain.DrinkType;
-import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 import coffeemachine.moneychecker.AlwaysEnoughMoney;
 import org.jmock.Expectations;
@@ -90,7 +90,7 @@ public class FunctionalTest {
             will(returnValue(order));
 
             oneOf(moneyChecker).getDifference(order);
-            will(returnValue(new MoneyDifference(-40)));
+            will(returnValue(new Money(-40)));
 
             oneOf(drinkMaker).process("M:There are 0,40 € missing");
         }});

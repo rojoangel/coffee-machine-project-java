@@ -1,13 +1,13 @@
 package coffeemachine.domain.message;
 
-import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Money;
 import coffeemachine.domain.Message;
 
 public class InsufficientFundsMessage implements Message
 {
-    private MoneyDifference difference;
+    private Money difference;
 
-    public InsufficientFundsMessage(MoneyDifference difference) {
+    public InsufficientFundsMessage(Money difference) {
         this.difference = difference;
     }
 

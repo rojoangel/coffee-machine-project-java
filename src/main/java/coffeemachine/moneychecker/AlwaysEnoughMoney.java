@@ -1,12 +1,12 @@
 package coffeemachine.moneychecker;
 
 import coffeemachine.MoneyChecker;
-import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 
 public class AlwaysEnoughMoney implements MoneyChecker
 {
-    public MoneyDifference getDifference(Order order) {
-        return new MoneyDifference(0);
+    public Money getDifference(Order order) {
+        return new Money(0);
     }
 }

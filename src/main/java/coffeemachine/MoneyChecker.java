@@ -1,9 +1,9 @@
 package coffeemachine;
 
-import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 
 public interface MoneyChecker
 {
-    MoneyDifference getDifference(Order order);
+    Money getDifference(Order order);
 }

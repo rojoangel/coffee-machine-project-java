@@ -2,7 +2,7 @@ package coffeemachine;
 
 import coffeemachine.adapter.MessageAdapter;
 import coffeemachine.adapter.OrderAdapter;
-import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 import coffeemachine.domain.message.InsufficientFundsMessage;
 
@@ -25,7 +25,7 @@ public class CoffeeMachine
     public void makeDrink() {
         Order order = userInputReader.readInput();
         String instructions = orderAdapter.adapt(order);
-        MoneyDifference difference = moneyChecker.getDifference(order);
+        Money difference = moneyChecker.getDifference(order);
         if (difference.getCents() < 0) {
             displayInsufficientFundsMessage(difference);
             return;
@@ -33,7 +33,7 @@ public class CoffeeMachine
         drinkMaker.process(instructions);
     }
 
-    private void displayInsufficientFundsMessage(MoneyDifference difference) {
+    private void displayInsufficientFundsMessage(Money difference) {
         InsufficientFundsMessage message = new InsufficientFundsMessage(difference);
         String instructions = messageAdapter.adapt(message);
         drinkMaker.process(instructions);

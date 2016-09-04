@@ -3,11 +3,11 @@ package coffeemachine.domain;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class MoneyDifference
+public class Money
 {
     private final int cents;
 
-    public MoneyDifference(int cents) {
+    public Money(int cents) {
         this.cents = cents;
     }
 
