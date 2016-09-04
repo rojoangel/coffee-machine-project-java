@@ -1,5 +1,6 @@
 package coffeemachine.sales;
 
+import coffeemachine.SalesReportWriter;
 import coffeemachine.SalesReporter;
 import coffeemachine.domain.DrinkType;
 import coffeemachine.domain.Money;
@@ -10,10 +11,13 @@ import java.util.Map;
 
 public class InMemorySalesReporter implements SalesReporter
 {
+    private SalesReportWriter salesReportWriter;
     private Map<DrinkType, Integer> drinksSold;
     private Money salesAmount;
 
-    public InMemorySalesReporter() {
+
+    public InMemorySalesReporter(SalesReportWriter salesReportWriter) {
+        this.salesReportWriter = salesReportWriter;
         this.drinksSold = new HashMap<DrinkType, Integer>();
         this.salesAmount = new Money(0);
     }
@@ -33,7 +37,9 @@ public class InMemorySalesReporter implements SalesReporter
         );
     }
 
-    public SalesReport report() {
-        return new SalesReport(this.drinksSold, this.salesAmount);
+    public void report() {
+        salesReportWriter.write(
+                new SalesReport(this.drinksSold, this.salesAmount)
+        );
     }
 }
