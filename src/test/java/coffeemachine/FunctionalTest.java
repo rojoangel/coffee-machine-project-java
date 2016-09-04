@@ -5,6 +5,8 @@ import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 import coffeemachine.domain.OrderableDrink;
 import coffeemachine.moneychecker.AlwaysEnoughMoney;
+import coffeemachine.ports.DrinkMaker;
+import coffeemachine.ports.OrderReader;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.After;

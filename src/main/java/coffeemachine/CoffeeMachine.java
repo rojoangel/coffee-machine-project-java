@@ -5,6 +5,8 @@ import coffeemachine.adapter.OrderAdapter;
 import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 import coffeemachine.domain.message.InsufficientFundsMessage;
+import coffeemachine.ports.DrinkMaker;
+import coffeemachine.ports.OrderReader;
 
 public class CoffeeMachine
 {

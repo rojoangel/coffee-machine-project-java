@@ -1,4 +1,4 @@
-package coffeemachine;
+package coffeemachine.ports;
 
 import coffeemachine.domain.Money;
 

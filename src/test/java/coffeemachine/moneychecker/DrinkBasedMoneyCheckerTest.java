@@ -1,6 +1,6 @@
 package coffeemachine.moneychecker;
 
-import coffeemachine.MoneyReader;
+import coffeemachine.ports.MoneyReader;
 import coffeemachine.domain.DrinkType;
 import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
