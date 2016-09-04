@@ -22,7 +22,7 @@ public class CoffeeMachine
         this.messageAdapter = new MessageAdapter();
     }
 
-    public void makeDrink() {
+    public void serveOrder() {
         Order order = orderReader.readInput();
         String instructions = orderAdapter.adapt(order);
         Money difference = moneyChecker.getDifference(order);

@@ -47,7 +47,7 @@ public class FunctionalTest {
         }});
 
         CoffeeMachine coffeeMachine = configureFreeMachine();
-        coffeeMachine.makeDrink();
+        coffeeMachine.serveOrder();
     }
 
     @Test
@@ -62,7 +62,7 @@ public class FunctionalTest {
         }});
 
         CoffeeMachine coffeeMachine = configureFreeMachine();
-        coffeeMachine.makeDrink();
+        coffeeMachine.serveOrder();
     }
 
     @Test
@@ -79,7 +79,7 @@ public class FunctionalTest {
         }});
 
         CoffeeMachine coffeeMachine = configureFreeMachine();
-        coffeeMachine.makeDrink();
+        coffeeMachine.serveOrder();
     }
 
     @Test
@@ -97,7 +97,7 @@ public class FunctionalTest {
         }});
 
         CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
-        coffeeMachine.makeDrink();
+        coffeeMachine.serveOrder();
     }
 
     @Test
@@ -112,7 +112,7 @@ public class FunctionalTest {
         }});
 
         CoffeeMachine coffeeMachine = configureFreeMachine();
-        coffeeMachine.makeDrink();
+        coffeeMachine.serveOrder();
     }
 
     @Test
@@ -130,7 +130,7 @@ public class FunctionalTest {
         }});
 
         CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
-        coffeeMachine.makeDrink();
+        coffeeMachine.serveOrder();
     }
 
     @Test
@@ -148,7 +148,7 @@ public class FunctionalTest {
         }});
 
         CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
-        coffeeMachine.makeDrink();
+        coffeeMachine.serveOrder();
     }
 
     @After
