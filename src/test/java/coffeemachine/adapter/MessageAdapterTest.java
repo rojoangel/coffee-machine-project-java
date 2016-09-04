@@ -1,10 +1,11 @@
-package coffeemachine;
+package coffeemachine.adapter;
 
+import coffeemachine.domain.Message;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MessageAdapterTest {
 

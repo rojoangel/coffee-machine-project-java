@@ -1,4 +1,4 @@
-package coffeemachine;
+package coffeemachine.domain;
 
 import java.text.NumberFormat;
 import java.util.Locale;

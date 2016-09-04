@@ -1,5 +1,9 @@
 package coffeemachine;
 
+import coffeemachine.domain.DrinkType;
+import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Order;
+import coffeemachine.moneychecker.AlwaysEnoughMoney;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.After;

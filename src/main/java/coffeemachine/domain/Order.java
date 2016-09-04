@@ -1,4 +1,4 @@
-package coffeemachine;
+package coffeemachine.domain;
 
 public class Order
 {

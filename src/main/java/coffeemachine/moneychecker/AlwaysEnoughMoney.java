@@ -1,4 +1,8 @@
-package coffeemachine;
+package coffeemachine.moneychecker;
+
+import coffeemachine.MoneyChecker;
+import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Order;
 
 public class AlwaysEnoughMoney implements MoneyChecker
 {

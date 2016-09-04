@@ -1,4 +1,7 @@
-package coffeemachine;
+package coffeemachine.domain.message;
+
+import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Message;
 
 public class InsufficientFundsMessage implements Message
 {

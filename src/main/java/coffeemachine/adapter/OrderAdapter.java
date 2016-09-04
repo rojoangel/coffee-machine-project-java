@@ -1,4 +1,6 @@
-package coffeemachine;
+package coffeemachine.adapter;
+
+import coffeemachine.domain.Order;
 
 public class OrderAdapter {
 

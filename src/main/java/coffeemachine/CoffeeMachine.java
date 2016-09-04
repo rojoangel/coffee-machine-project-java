@@ -1,5 +1,11 @@
 package coffeemachine;
 
+import coffeemachine.adapter.MessageAdapter;
+import coffeemachine.adapter.OrderAdapter;
+import coffeemachine.domain.MoneyDifference;
+import coffeemachine.domain.Order;
+import coffeemachine.domain.message.InsufficientFundsMessage;
+
 public class CoffeeMachine
 {
     private final DrinkMaker drinkMaker;

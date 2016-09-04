@@ -1,8 +1,10 @@
-package coffeemachine;
+package coffeemachine.adapter;
 
+import coffeemachine.domain.DrinkType;
+import coffeemachine.domain.Order;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class OrderAdapterTest {
 

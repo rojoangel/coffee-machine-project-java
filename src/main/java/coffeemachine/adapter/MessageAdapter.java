@@ -1,4 +1,6 @@
-package coffeemachine;
+package coffeemachine.adapter;
+
+import coffeemachine.domain.Message;
 
 public class MessageAdapter {
 
