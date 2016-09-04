@@ -5,7 +5,9 @@ import coffeemachine.domain.Money;
 import coffeemachine.domain.Order;
 import coffeemachine.domain.OrderableDrink;
 import coffeemachine.moneychecker.AlwaysEnoughMoney;
+import coffeemachine.ports.BeverageQuantityChecker;
 import coffeemachine.ports.DrinkMaker;
+import coffeemachine.ports.EmailNotifier;
 import coffeemachine.ports.OrderReader;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -20,6 +22,8 @@ public class FunctionalTest {
     private OrderReader orderReader;
     private MoneyChecker moneyChecker;
     private SalesReporter salesReporter;
+    private BeverageQuantityChecker beverageQuantityChecker;
+    private EmailNotifier emailNotifier;
 
     @Before
     public void setUp() throws Exception {
@@ -28,14 +32,30 @@ public class FunctionalTest {
         orderReader = context.mock(OrderReader.class);
         moneyChecker = context.mock(MoneyChecker.class);
         salesReporter = context.mock(SalesReporter.class);
+        beverageQuantityChecker = context.mock(BeverageQuantityChecker.class);
+        emailNotifier = context.mock(EmailNotifier.class);
     }
 
     private CoffeeMachine configureFreeMachine() {
-        return new CoffeeMachine(drinkMaker, orderReader, new AlwaysEnoughMoney(), salesReporter);
+        return new CoffeeMachine(
+                drinkMaker,
+                orderReader,
+                new AlwaysEnoughMoney(),
+                salesReporter,
+                beverageQuantityChecker,
+                emailNotifier
+        );
     }
 
     private CoffeeMachine configureMoneyCheckingMachine() {
-        return new CoffeeMachine(drinkMaker, orderReader, moneyChecker, salesReporter);
+        return new CoffeeMachine(
+                drinkMaker,
+                orderReader,
+                moneyChecker,
+                salesReporter,
+                beverageQuantityChecker,
+                emailNotifier
+        );
     }
 
     @Test
@@ -44,6 +64,9 @@ public class FunctionalTest {
         order.addSugar();
 
         context.checking(new Expectations() {{
+            ignoring(beverageQuantityChecker);
+            ignoring(emailNotifier);
+
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
@@ -61,6 +84,9 @@ public class FunctionalTest {
         final Order order = new Order(OrderableDrink.HOT_CHOCOLATE);
 
         context.checking(new Expectations() {{
+            ignoring(beverageQuantityChecker);
+            ignoring(emailNotifier);
+
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
@@ -80,6 +106,9 @@ public class FunctionalTest {
         order.addSugar();
 
         context.checking(new Expectations() {{
+            ignoring(beverageQuantityChecker);
+            ignoring(emailNotifier);
+
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
@@ -97,6 +126,9 @@ public class FunctionalTest {
         final Order order = new Order(OrderableDrink.ORANGE_JUICE);
 
         context.checking(new Expectations() {{
+            ignoring(beverageQuantityChecker);
+            ignoring(emailNotifier);
+
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
@@ -134,6 +166,9 @@ public class FunctionalTest {
         final Order order = new Order(new OrderableDrink(DrinkType.TEA, null));
 
         context.checking(new Expectations() {{
+            ignoring(beverageQuantityChecker);
+            ignoring(emailNotifier);
+
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
@@ -154,6 +189,9 @@ public class FunctionalTest {
         final Order order = new Order(new OrderableDrink(DrinkType.TEA, null));
 
         context.checking(new Expectations() {{
+            ignoring(beverageQuantityChecker);
+            ignoring(emailNotifier);
+
             oneOf(orderReader).readInput();
             will(returnValue(order));
 
@@ -183,6 +221,31 @@ public class FunctionalTest {
         CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
         coffeeMachine.reportSales();
 
+    }
+
+    @Test
+    public void notifiesShortages() throws Exception {
+
+        final Order order = new Order(new OrderableDrink(DrinkType.TEA, null));
+
+        context.checking(new Expectations() {{
+            oneOf(orderReader).readInput();
+            will(returnValue(order));
+
+            oneOf(moneyChecker).getDifference(order);
+            will(returnValue(new Money(0)));
+
+            oneOf(beverageQuantityChecker).isEmpty(DrinkType.TEA.toString());
+            will(returnValue(true));
+
+            oneOf(emailNotifier).notifyMissingDrink(DrinkType.TEA.toString());
+
+            never(salesReporter);
+            never(drinkMaker);
+        }});
+
+        CoffeeMachine coffeeMachine = configureMoneyCheckingMachine();
+        coffeeMachine.serveOrder();
     }
 
     @After
