@@ -5,7 +5,16 @@ import coffeemachine.domain.Order;
 public class OrderAdapter {
 
     public String adapt(Order order) {
-        return extractDrink(order) + ":" + extractSugar(order) + ":" + extractStick(order);
+        return extractDrink(order) + extractExtraHot(order) +
+                ":" + extractSugar(order) +
+                ":" + extractStick(order);
+    }
+
+    private String extractExtraHot(Order order) {
+        if (!order.isExtraHot()) {
+            return "";
+        }
+        return "h";
     }
 
     private String extractDrink(Order order) {
