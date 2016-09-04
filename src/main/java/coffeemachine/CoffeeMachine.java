@@ -13,11 +13,18 @@ public class CoffeeMachine
     private final MoneyChecker moneyChecker;
     private final OrderAdapter orderAdapter;
     private final MessageAdapter messageAdapter;
+    private final SalesReporter salesReporter;
 
-    public CoffeeMachine(DrinkMaker drinkMaker, OrderReader orderReader, MoneyChecker moneyChecker) {
+    public CoffeeMachine(
+            DrinkMaker drinkMaker,
+            OrderReader orderReader,
+            MoneyChecker moneyChecker,
+            SalesReporter salesReporter
+    ) {
         this.drinkMaker = drinkMaker;
         this.orderReader = orderReader;
         this.moneyChecker = moneyChecker;
+        this.salesReporter = salesReporter;
         this.orderAdapter = new OrderAdapter();
         this.messageAdapter = new MessageAdapter();
     }
@@ -30,6 +37,7 @@ public class CoffeeMachine
             displayInsufficientFundsMessage(difference);
             return;
         }
+        salesReporter.report(order);
         drinkMaker.process(instructions);
     }
 
